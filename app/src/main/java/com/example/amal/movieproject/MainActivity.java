@@ -38,16 +38,15 @@ import java.util.List;
 import static android.R.id.list;
 
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity {
 
     Adapter adapter;
-    String sector="http://image.tmdb.org/t/p/w185/";
+    String sector = "http://image.tmdb.org/t/p/w185/";
     List<Movie> myMovies;
     RecyclerView display;
     RequestQueue requestQueue;
 
     List<Movie> favoritelist;
-
 
 
     Helper helper;
@@ -57,19 +56,18 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        requestQueue= Volley.newRequestQueue(this);
-        myMovies=new ArrayList<>();
-        display=(RecyclerView)findViewById(R.id.myview);
-        display.setLayoutManager(new GridLayoutManager(this,2));
-        adapter=new Adapter(MainActivity.this,myMovies);
+        requestQueue = Volley.newRequestQueue(this);
+        myMovies = new ArrayList<>();
+        display = (RecyclerView) findViewById(R.id.myview);
+        display.setLayoutManager(new GridLayoutManager(this, 2));
+        adapter = new Adapter(MainActivity.this, myMovies);
         display.setAdapter(adapter);
-        String url="https://api.themoviedb.org/3/discover/movie?api_key=69f8d44407d7b73a4103add4c76fccb6";
+        super.setTitle("All Movies");
+        String url = "https://api.themoviedb.org/3/discover/movie?api_key=69f8d44407d7b73a4103add4c76fccb6";
         getMovieData(url);
 
-        favoritelist= new ArrayList<>();
-        helper= new Helper(this);
-
-
+        favoritelist = new ArrayList<>();
+        helper = new Helper(this);
 
 
     }
@@ -108,14 +106,17 @@ public class MainActivity extends AppCompatActivity  {
         inflater.inflate(R.menu.menu, menu);
         return true;
     }
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
 
-        switch (item.getItemId())
-        {
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
             case R.id.FavoriteList:
                 ChangeList();
+                super.setTitle("Favorite List");
                 return true;
+            case R.id.MovieList:
+                AllMovie();
+                super.setTitle("All Movies");
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -123,32 +124,38 @@ public class MainActivity extends AppCompatActivity  {
         }
 
     }
-    public void ChangeList()
-    {
+
+    public void ChangeList() {
 
         //Cursor c ;
         //c=helper.select();
-       // c.moveToFirst();
+        // c.moveToFirst();
         //for(int i=0;i<c.getCount();i++)
-       // {
-          //  Movie movieee = new Movie();
-           // movieee.setName(c.getString(0));
-           // movieee.setPosterPath(c.getString(1));
-           // movieee.setOverView(c.getString(2));
+        // {
+        //  Movie movieee = new Movie();
+        // movieee.setName(c.getString(0));
+        // movieee.setPosterPath(c.getString(1));
+        // movieee.setOverView(c.getString(2));
 
-            favoritelist=helper.getAllContacts();
-            //c.moveToNext();
-      //  }
+        favoritelist = helper.getAllContacts();
+        //c.moveToNext();
+
+
+        //  }
         adapter.notifyDataSetChanged();
-        adapter=new Adapter(MainActivity.this,favoritelist);
+        adapter = new Adapter(MainActivity.this, favoritelist);
         display.setAdapter(adapter);
 
 
-
-
-
-
-
     }
+
+
+    public void AllMovie() {
+        adapter.notifyDataSetChanged();
+        adapter = new Adapter(MainActivity.this, myMovies);
+        display.setAdapter(adapter);
+    }
+
+
 }
 

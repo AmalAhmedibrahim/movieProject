@@ -74,6 +74,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.Holder>{
             Intent i = new Intent(context,fimdetails.class) ;
             i.putExtra("movieClicked",movie.get(getLayoutPosition()));
             context.startActivity(i);
+
         }
     }
 

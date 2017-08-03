@@ -5,8 +5,8 @@
     >
 
     <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="310dp"
+        android:layout_height="310dp"
         android:id="@+id/photo"
          />
 

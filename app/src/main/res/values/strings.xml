@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MovieProject</string>
+    <string name="mm" translatable="false">Movie Un favorite success</string>
 </resources>
